@@ -2,6 +2,12 @@ import mongoose from "mongoose";
 
 export const roverSchema = new mongoose.Schema({
 
+    idNasa: {
+        type: Number,
+        required: true
+
+    },
+
     camera: {
         name: {
             type: String,

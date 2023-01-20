@@ -12,6 +12,9 @@ import routerApodApiRovers from './src/routes/syncApiRovers.js';
 import Apod from './src/models/apod.js';
 import Rover from './src/models/rover.js';
 import User from './src/models/user.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 
 
@@ -31,7 +34,7 @@ const startApp = async () => {
     }
     deleteAllApod()
 
-    const deleteAllROver = function () {
+    const deleteAllRovers = function () {
 
         Rover.deleteMany({}, function (err) {
             if (err) console.log(err);
@@ -39,7 +42,7 @@ const startApp = async () => {
         });
 
     }
-    deleteAllROver()
+    deleteAllRovers()
 
     const deleteAllUsers = function () {
 

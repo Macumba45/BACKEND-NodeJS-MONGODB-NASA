@@ -14,14 +14,14 @@ const getUserId = async (id) => {
 }
 
 const getUserByEmail = async (email) => {
-    const user = await User.findOne({ email: email })
+    const user = await User.findOne({ email })
     return user
 }
 
 
-const createUser = async ({ name, email }) => {
+const createUser = async ({ name, email, password }) => {
 
-    const user = new User({ name, email });
+    const user = new User({ name, email, password });
     return user.save();
 
 }

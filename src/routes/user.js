@@ -6,8 +6,9 @@ routerUser.get('/', async (req, res) => {
     try {
         const users = await getUserList()
         res.status(200).json(users)
+        // res.setHeader('content-type', 'text/plain');
     } catch (error) {
-        response.status(500)
+        res.response.status(500)
     }
 })
 
@@ -18,7 +19,7 @@ routerUser.get('/:id', async (req, res) => {
         const task = await getUserId(id)
         res.status(200).json(task)
     } catch (error) {
-        response.status(500)
+        res.response.status(500)
     }
 });
 
@@ -27,13 +28,12 @@ routerUser.post('/', async (req, res) => {
 
     try {
         const bodyData = req.body
-        console.log(bodyData)
-        const apod = await createUser(bodyData)
-        res.status(200).json(apod)
+        const user = await createUser(bodyData)
+        res.status(200).json(user)
 
     } catch (error) {
         console.log(error)
-        res.status(500).json('User already exists')
+        res.status(500).json(error.message)
     }
 })
 
@@ -44,7 +44,6 @@ routerUser.put('/:id', async (req, res) => {
         const task = await updateUser(id, data)
         res.status(200).json(task)
     } catch (error) {
-        console.log(error)
         res.status(500).json('User update failed')
     }
 });

@@ -19,21 +19,19 @@ const getRoverId = async (id) => {
 }
 
 
-const createRover = async ({ camera: name, full_name, img_src, earth_date }) => {
-    const exists = await Rover.find({ camera: name, full_name, img_src, earth_date })
-
+const createRover = async ({ idNasa, camera: name, full_name, img_src, earth_date }) => {
+    const exists = await Rover.find({ idNasa, camera: name, full_name, img_src, earth_date })
     const arrRoverCreation = []
     const roverFind = await Rover.find()
-    console.log(roverFind)
 
     try {
         for (const item of exists) {
-            const exists = roverFind.find({ camera: name, full_name, img_src, earth_date })
+            const exists = roverFind.find({ idNasa, camera: name, full_name, img_src, earth_date })
             if (!exists) {
                 arrRoverCreation.push(item)
             }
         }
-        const createRover = new Rover({ camera: name, full_name, img_src, earth_date });
+        const createRover = new Rover({ idNasa, camera: name, full_name, img_src, earth_date });
         // console.log(createRover)
         return createRover.save()
 

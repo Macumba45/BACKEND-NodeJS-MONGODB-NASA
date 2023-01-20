@@ -33,30 +33,27 @@ async function apiCallApod() {
 
 async function apiCallRovers() {
 
-    try {
+    const response = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=MHU6tgxe1jpiu8rvJUM6yPczfAbm2NueXnFKWAQI')
+    const rovers = await response.json()
+    const roverPhoto = rovers.photos
+    const newList = roverPhoto.map(rover => ({ idNasa: rover.id, camera: rover.camera, img_src: rover.img_src, earth_date: rover.earth_date }));
 
-        const response = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=MHU6tgxe1jpiu8rvJUM6yPczfAbm2NueXnFKWAQI')
-        const rovers = await response.json()
-        const roverPhoto = rovers.photos
-        const newList = roverPhoto.map(rover => ({ camera: rover.camera, img_src: rover.img_src, earth_date: rover.earth_date }));
+    const arrRoverCreation = []
+    const roverFind = await Rover.find()
 
-        const arrRoverCreation = []
-        const roverFind = await Rover.find()
-
-        for (const item of newList) {
-            const exists = roverFind.find(item => ({ camera: item.camera, img_src: item.img_src, earth_date: item.earth_date }));
-            if (!exists) {
-                arrRoverCreation.push(item)
-            }
+    for (const item of newList) {
+        const exists = roverFind.find((existItem) => existItem.idNasa === item.idNasa);
+        if (!exists) {
+            arrRoverCreation.push(item)
         }
-        const allData = await Rover.insertMany(arrRoverCreation);
-
-        return allData
-
-    } catch (error) {
-        console.log("DOCUMENTO YA EXISTE")
     }
 
+    if (arrRoverCreation.length > 0) {
+        await Rover.insertMany(arrRoverCreation)
+        console.log('Rover Inserted')
+    }
+
+    return [...roverFind, ...arrRoverCreation]
 }
 
 

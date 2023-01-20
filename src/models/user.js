@@ -15,6 +15,7 @@ export const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
+        required: true
     },
     salt: {
         type: String,

@@ -31,7 +31,6 @@ routerRover.post('/', async (req, res) => {
         res.status(200).json(rover)
 
     } catch (error) {
-        console.log(error)
         res.status(500).json('Document creation failed')
     }
 })

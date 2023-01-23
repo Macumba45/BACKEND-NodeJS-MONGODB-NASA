@@ -8,7 +8,6 @@ routerApodApiRovers.get('/', async (req, res) => {
         const apods = await apiCallRovers()
         res.status(200).json(apods)
     } catch (error) {
-        console.log(error)
         response.status(500)
     }
 })

@@ -8,7 +8,6 @@ routerApodApi.get('/', async (req, res) => {
         const apods = await apiCallApod()
         res.status(200).json(apods)
     } catch (error) {
-        console.log(error)
         res.status(500).json('No new documents found')
     }
 })

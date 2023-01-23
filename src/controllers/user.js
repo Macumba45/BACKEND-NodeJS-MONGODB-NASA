@@ -53,10 +53,13 @@ const updateUserFavList = async ({ id, idNasa }) => {
     await User.findByIdAndUpdate(id, { favList: newFavsList })
 
     let userUpdate = await getUserId(id)
+    console.log(userUpdate)
     userUpdate = JSON.parse(JSON.stringify(userUpdate))
 
     const { password, salt, ...userUpdate_ } = userUpdate;
+
     return userUpdate_
 }
+
 
 export { getUserList, getUserId, getUserByEmail, createUser, updateUser, deleteUser, updateUserFavList }

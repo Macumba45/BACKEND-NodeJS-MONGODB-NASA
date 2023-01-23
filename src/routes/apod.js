@@ -33,7 +33,6 @@ routerApod.post('/', async (req, res) => {
 
     } catch (error) {
 
-        console.log(error)
         res.status(500).json('Document creation failed')
     }
 })
@@ -45,7 +44,6 @@ routerApod.put('/:id', async (req, res) => {
         const task = await updateApod(id, data)
         res.status(200).json(task)
     } catch (error) {
-        console.log(error)
         res.status(500).json('Document update failed')
     }
 });

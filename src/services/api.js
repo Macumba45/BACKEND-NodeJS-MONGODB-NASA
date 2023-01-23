@@ -23,7 +23,6 @@ async function apiCallApod() {
 
     if (arrApodCreation.length > 0) {
         await Apod.insertMany(arrApodCreation)
-        console.log('Apod Inserted')
     }
 
     return [...apodFind, ...arrApodCreation]
@@ -50,7 +49,6 @@ async function apiCallRovers() {
 
     if (arrRoverCreation.length > 0) {
         await Rover.insertMany(arrRoverCreation)
-        console.log('Rover Inserted')
     }
 
     return roverFind.concat(...arrRoverCreation)

@@ -2,22 +2,21 @@ import User from "../models/user.js";
 
 const getUserList = async () => {
 
-    const userList = await User.find();
-    return userList
+    const user = await User.find();
+    return user
 
 }
 
 const getUserId = async (id) => {
 
-    const userId = await User.findById(id)
-    return userId
+    const user = await User.findById(id)
+    return user
 }
 
 const getUserByEmail = async (email) => {
     const user = await User.findOne({ email })
     return user
 }
-
 
 const createUser = async ({ name, email, password }) => {
 
@@ -28,8 +27,8 @@ const createUser = async ({ name, email, password }) => {
 
 const updateUser = async (id, data) => {
 
-    const userUpdate = await getUserId(id);
-    await userUpdate.updateOne(data)
+    const user = await getUserId(id);
+    await user.updateOne(data)
     return data
 }
 
@@ -38,4 +37,26 @@ const deleteUser = async ({ id }) => {
     return true
 }
 
-export { getUserList, getUserId, getUserByEmail, createUser, updateUser, deleteUser }
+const updateUserFavList = async ({ id, idNasa }) => {
+    const user = await getUserId(id);
+    const currentFavList = user.favList
+    let newFavsList = currentFavList
+
+    const existed = currentFavList.includes(idNasa)
+
+    if (existed) {
+        newFavsList = currentFavList.filter(item => item !== idNasa)
+    } else {
+        newFavsList.push(idNasa)
+    }
+
+    await User.findByIdAndUpdate(id, { favList: newFavsList })
+
+    let userUpdate = await getUserId(id)
+    userUpdate = JSON.parse(JSON.stringify(userUpdate))
+
+    const { password, salt, ...userUpdate_ } = userUpdate;
+    return userUpdate_
+}
+
+export { getUserList, getUserId, getUserByEmail, createUser, updateUser, deleteUser, updateUserFavList }

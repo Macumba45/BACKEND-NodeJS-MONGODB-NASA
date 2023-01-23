@@ -20,7 +20,10 @@ export const userSchema = new mongoose.Schema({
     salt: {
         type: String,
 
-    }
+    },
+    favList: {
+        type: [String]
+    },
 
 }, { collection: 'users' });
 

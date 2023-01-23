@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { getUserList, getUserId, createUser, updateUser, deleteUser } from '../controllers/user.js';
+import { getUserList, getUserId, createUser, updateUser, deleteUser, updateUserFavList } from '../controllers/user.js';
 const routerUser = Router()
+
 
 routerUser.get('/', async (req, res) => {
     try {
         const users = await getUserList()
         res.status(200).json(users)
-        // res.setHeader('content-type', 'text/plain');
     } catch (error) {
         res.response.status(500)
     }
@@ -58,11 +58,18 @@ routerUser.delete('/:id', async (req, res) => {
     } catch (error) {
         response.status(500)
     }
-
-
 });
 
+routerUser.post('/favBookList/:idNasa', async (req, res) => {
+    try {
+        const { idNasa } = req.params
+        const user = await updateUserFavList({ id: req.user.id, idNasa })
+        res.status(200).json(user)
 
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+})
 
 export default routerUser
 

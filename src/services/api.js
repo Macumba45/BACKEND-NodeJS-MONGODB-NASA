@@ -53,7 +53,8 @@ async function apiCallRovers() {
         console.log('Rover Inserted')
     }
 
-    return [...roverFind, ...arrRoverCreation]
+    return roverFind.concat(...arrRoverCreation)
+    //return [...roverFind, ...arrRoverCreation]
 }
 
 

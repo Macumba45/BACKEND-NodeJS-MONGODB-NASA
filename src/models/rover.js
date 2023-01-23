@@ -25,6 +25,6 @@ export const roverSchema = new mongoose.Schema({
     },
 });
 
-const Rover = mongoose.model('ApodApiRover', roverSchema);
+const Rover = mongoose.model('RoversApi', roverSchema);
 
 export default Rover 

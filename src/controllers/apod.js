@@ -53,7 +53,7 @@ const updateApod = async (id, data) => {
 }
 
 const deleteApod = async ({ id }) => {
-    await Apod.findOneAndRemove(id)
+    await Apod.findOneAndRemove({ id })
     return true
 }
 

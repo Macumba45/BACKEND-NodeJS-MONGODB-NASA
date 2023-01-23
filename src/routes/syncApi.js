@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { apiCallApod } from "../services/api.js";
-const routerApodApi = Router();
+const routerApodsApi = Router();
 
-routerApodApi.get('/', async (req, res) => {
+routerApodsApi.get('/', async (req, res) => {
     try {
 
         const apods = await apiCallApod()
@@ -13,5 +13,4 @@ routerApodApi.get('/', async (req, res) => {
 })
 
 
-
-export default routerApodApi
+export default routerApodsApi

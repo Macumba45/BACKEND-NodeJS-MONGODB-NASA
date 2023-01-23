@@ -62,6 +62,7 @@ routerUser.get('/:id', async (req, res) => {
 
 routerUser.post('/favBookList/:idNasa', async (req, res) => {
     try {
+
         const { idNasa } = req.params
         const user = await updateUserFavList({ id: req.user.id, idNasa })
         res.status(200).json(user)

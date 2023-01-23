@@ -32,7 +32,6 @@ const createRover = async ({ idNasa, camera: name, full_name, img_src, earth_dat
             }
         }
         const createRover = new Rover({ idNasa, camera: name, full_name, img_src, earth_date });
-        // console.log(createRover)
         return createRover.save()
 
     } catch (error) {
@@ -51,7 +50,7 @@ const updateRover = async (id, data) => {
 }
 
 const deleteRover = async ({ id }) => {
-    await Rover.findOneAndRemove(id)
+    await Rover.findOneAndRemove({ id })
     return true
 }
 

@@ -4,7 +4,6 @@ import Rover from '../models/rover.js';
 
 async function apiCallApod() {
 
-
     const response = await fetch('https://api.nasa.gov/planetary/apod?start_date=2023-01-01&api_key=MHU6tgxe1jpiu8rvJUM6yPczfAbm2NueXnFKWAQI')
     const apods = await response.json()
 
@@ -54,8 +53,6 @@ async function apiCallRovers() {
     return roverFind.concat(...arrRoverCreation)
     //return [...roverFind, ...arrRoverCreation]
 }
-
-
 
 export { apiCallApod, apiCallRovers }
 

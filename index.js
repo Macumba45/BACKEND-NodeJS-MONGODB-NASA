@@ -11,6 +11,7 @@ import routerApiRovers from './src/routes/syncApiRovers.js';
 import dotenv from 'dotenv';
 import { ensureAuthenticated } from './src/middleware/auth.js';
 
+
 dotenv.config();
 
 const startApp = async () => {
@@ -46,7 +47,7 @@ const startApp = async () => {
     // deleteAllUsers()
 
     const app = express();
-    const port = 8000
+    const port = process.env.PORT;
 
     app.use(bodyParser.json());
     app.use(express.json());

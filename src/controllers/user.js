@@ -48,7 +48,6 @@ const updateUserFavList = async ({ id, idNasa }) => {
         let newFavsList = currentFavList
         const existed = currentFavList.includes(idNasa)
         const roverDB = await Rover.findById(idNasa)
-        // const apodDB = await Apod.findById(idNasa)
 
         if (existed) {
             newFavsList = currentFavList.filter(item => item !== idNasa)
@@ -69,7 +68,7 @@ const updateUserFavList = async ({ id, idNasa }) => {
         return userUpdate_
 
     } catch (error) {
-        console.log(error)
+        // console.log(error.message)
     }
 
 }

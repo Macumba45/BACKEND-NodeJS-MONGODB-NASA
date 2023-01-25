@@ -17,9 +17,9 @@ routerUser.get('/:id', async (req, res) => {
     try {
         const { id } = req.params
         const task = await getUserId(id)
-        res.status(200).json(task)
+        res.status(200).json({ _id: task._id, email: task.email, favList: task.favList })
     } catch (error) {
-        res.response.status(500)
+        res.status(500).json(error.message)
     }
 });
 
@@ -61,15 +61,19 @@ routerUser.get('/:id', async (req, res) => {
 // });
 
 routerUser.post('/favBookList/:idNasa', async (req, res) => {
-    try {
 
+    try {
         const { idNasa } = req.params
         const user = await updateUserFavList({ id: req.user.id, idNasa })
-        res.status(200).json(user)
+        if (user === undefined) {
+            return res.status(200).json("Data no exist in database")
+        }
+        res.status(200).json("Data updated successfully")
 
     } catch (error) {
-        res.status(500).json(error.message)
+        console.log(error.message)
     }
+
 });
 
 

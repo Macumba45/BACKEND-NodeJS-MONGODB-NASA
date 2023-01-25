@@ -4,7 +4,7 @@ import Rover from '../models/rover.js';
 
 async function apiCallApod() {
 
-    const response = await fetch('https://api.nasa.gov/planetary/apod?start_date=2023-01-01&api_key=MHU6tgxe1jpiu8rvJUM6yPczfAbm2NueXnFKWAQI')
+    const response = await fetch('https://api.nasa.gov/planetary/apod?start_date=2023-01-01&api_key=' + process.env.API_KEY);
     const apods = await response.json()
 
     const newList = apods.map(apod => ({ title: apod.title, date: apod.date, explanation: apod.explanation, url: apod.url }));
@@ -31,7 +31,7 @@ async function apiCallApod() {
 
 async function apiCallRovers() {
 
-    const response = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=MHU6tgxe1jpiu8rvJUM6yPczfAbm2NueXnFKWAQI')
+    const response = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=' + process.env.API_KEY)
     const rovers = await response.json()
     const roverPhoto = rovers.photos
     const newList = roverPhoto.map(rover => ({ idNasa: rover.id, camera: rover.camera, img_src: rover.img_src, earth_date: rover.earth_date }));
